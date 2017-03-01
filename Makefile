@@ -5,6 +5,7 @@ else
 RT28xx_MODE = $(WIFI_MODE)
 endif
 
+CFLAGS = "-Wno-error=date-time"
 ifeq ($(TARGET),)
 TARGET = LINUX
 endif

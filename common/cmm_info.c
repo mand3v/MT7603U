@@ -75,12 +75,14 @@ INT Set_DriverVersion_Proc(RTMP_ADAPTER *pAd, RTMP_STRING *arg)
 {
 #ifdef CONFIG_AP_SUPPORT
 	IF_DEV_CONFIG_OPMODE_ON_AP(pAd)
-		DBGPRINT(RT_DEBUG_OFF, ("Driver version-%s %s %s\n", AP_DRIVER_VERSION, __DATE__, __TIME__));
+		//DBGPRINT(RT_DEBUG_OFF, ("Driver version-%s %s %s\n", AP_DRIVER_VERSION, __DATE__, __TIME__));
+		DBGPRINT(RT_DEBUG_OFF, ("Driver version-%s %s %s\n", AP_DRIVER_VERSION, "__DATE__", "__TIME__"));
 #endif /* CONFIG_AP_SUPPORT */
 
 #ifdef CONFIG_STA_SUPPORT
 	IF_DEV_CONFIG_OPMODE_ON_STA(pAd)
-		DBGPRINT(RT_DEBUG_OFF, ("Driver version-%s %s %s\n", STA_DRIVER_VERSION, __DATE__, __TIME__));
+		//DBGPRINT(RT_DEBUG_OFF, ("Driver version-%s %s %s\n", STA_DRIVER_VERSION, __DATE__, __TIME__));
+		DBGPRINT(RT_DEBUG_OFF, ("Driver version-%s %s %s\n", STA_DRIVER_VERSION, "__DATE__", "__TIME__"));
 #endif /* CONFIG_STA_SUPPORT */
 
 #ifdef CONFIG_ANDES_SUPPORT
@@ -6402,7 +6404,7 @@ INT32 ShowPseData(RTMP_ADAPTER *pAd, RTMP_STRING *arg)
 #ifdef RT_BIG_ENDIAN
 		MTMacInfoEndianChange(pAd, (PUCHAR)(PseData), TYPE_TMACINFO, 32);
 #endif
-		dump_tmac_info(pAd, PseData);
+		dump_tmac_info(pAd, (UCHAR *)PseData);
 
 #ifdef RT_BIG_ENDIAN
 		MTMacInfoEndianChange(pAd, (PUCHAR)(PseData), TYPE_TMACINFO, 32);

@@ -653,6 +653,8 @@ INT RtmpChipOpsEepromHook(RTMP_ADAPTER *pAd, INT infType)
 	if (e2p_type != E2P_EFUSE_MODE)
 		pAd->bUseEfuse = FALSE;
 #endif /* RTMP_EFUSE_SUPPORT */
+// To cast rtmp_ee_bin_read16 function for it to work correctly 
+typedef BOOLEAN (*EE_READ_FUNCTION) (RTMP_ADAPTER *pAd, UINT16 Offset, UINT32 *pValue);
 
 	DBGPRINT(RT_DEBUG_OFF, ("%s: E2P type(%d), E2pAccessMode = %d, E2P default = %d\n", __FUNCTION__, e2p_type, pAd->E2pAccessMode, e2p_default));
 	pAd->eeprom_type = (e2p_type==E2P_EFUSE_MODE)  ? EEPROM_EFUSE: EEPROM_FLASH;
@@ -664,7 +666,7 @@ INT RtmpChipOpsEepromHook(RTMP_ADAPTER *pAd, INT infType)
 		case E2P_BIN_MODE:
 		{
 			pChipOps->eeinit = rtmp_ee_load_from_bin;
-			pChipOps->eeread = rtmp_ee_bin_read16;
+			pChipOps->eeread = (EE_READ_FUNCTION) rtmp_ee_bin_read16;
 			pChipOps->eewrite = rtmp_ee_bin_write16;
 			DBGPRINT(RT_DEBUG_OFF, ("NVM is BIN mode\n"));
 			return 0;
@@ -695,7 +697,7 @@ INT RtmpChipOpsEepromHook(RTMP_ADAPTER *pAd, INT infType)
 			if (pAd->bUseEfuse)
 			{
 				pChipOps->eeinit = eFuse_init;
-				pChipOps->eeread = rtmp_ee_efuse_read16;
+				pChipOps->eeread = (EE_READ_FUNCTION)rtmp_ee_efuse_read16;
 				pChipOps->eewrite = rtmp_ee_efuse_write16;
 				DBGPRINT(RT_DEBUG_OFF, ("NVM is EFUSE mode\n"));
 				return 0;
@@ -710,7 +712,7 @@ INT RtmpChipOpsEepromHook(RTMP_ADAPTER *pAd, INT infType)
 			DBGPRINT(RT_DEBUG_ERROR, ("%s: Do not support E2P type(%d), change to BIN mode\n", __FUNCTION__, e2p_type));
 
 			pChipOps->eeinit = rtmp_ee_load_from_bin;
-			pChipOps->eeread = rtmp_ee_bin_read16;
+			pChipOps->eeread = (EE_READ_FUNCTION)rtmp_ee_bin_read16;
 			pChipOps->eewrite = rtmp_ee_bin_write16;
 			DBGPRINT(RT_DEBUG_OFF, ("NVM is BIN mode\n"));
 			return 0;
@@ -723,7 +725,7 @@ INT RtmpChipOpsEepromHook(RTMP_ADAPTER *pAd, INT infType)
 #ifdef RTMP_USB_SUPPORT
 		case RTMP_DEV_INF_USB:
 			pChipOps->eeinit = NULL;
-			pChipOps->eeread = RTUSBReadEEPROM16;
+			pChipOps->eeread = (EE_READ_FUNCTION)RTUSBReadEEPROM16;
 			pChipOps->eewrite = RTUSBWriteEEPROM16;
 			break;
 #endif /* RTMP_USB_SUPPORT */

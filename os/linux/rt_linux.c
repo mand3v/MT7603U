@@ -894,8 +894,8 @@ static inline void __RtmpOSFSInfoChange(OS_FS_INFO * pOSFSInfo, BOOLEAN bSet)
       pOSFSInfo->fsuid = (int)uid.val;
       pOSFSInfo->fsgid = (int)gid.val;
 #else
-		pOSFSInfo->fsuid = (int)(current_fsuid());
-		pOSFSInfo->fsgid = (int)(current_fsgid());
+		pOSFSInfo->fsuid = *(int*)(&current_fsuid());
+		pOSFSInfo->fsgid = *(int*)(&current_fsgid());
 
 #endif
 #endif

@@ -1296,7 +1296,7 @@ VOID dev_rx_ctrl_frm(RTMP_ADAPTER *pAd, RX_BLK *pRxBlk)
 				BA_CONTROL *ba_ctrl;
 				DBGPRINT(RT_DEBUG_OFF, ("%s():BlockAck From WCID:%d\n", __FUNCTION__, pRxBlk->wcid));
 
-				ptr = pRxBlk->pHeader;
+				ptr = (UCHAR *)pRxBlk->pHeader;
 				ptr += 4;
 				ra = ptr;
 				ptr += 6;

@@ -447,7 +447,7 @@ static VOID CmdPsRetrieveRsp(struct cmd_msg *msg, char *Data, UINT16 Len)
 	P_EXT_EVENT_AP_PS_RETRIEVE_T EvtPsCapatibility;
 	UINT32 Status;
 
-    EvtPsCapatibility = (struct EXT_EVENT_AP_PS_RETRIEVE_T *)Data;
+    EvtPsCapatibility = (P_EXT_EVENT_AP_PS_RETRIEVE_T)Data;
         Status = le2cpu32(EvtPsCapatibility->u4Param1);
 
    DBGPRINT(RT_DEBUG_ERROR, ("%s Disable FW PS Supportstatus:%x !!!!!\n",__FUNCTION__,Status));
@@ -1381,7 +1381,7 @@ static VOID CmdMultipleRfRegAccessReadCb(struct cmd_msg *msg,
 	UINT32 Num = (len -20) / sizeof(EXT_EVENT_MULTI_CR_ACCESS_RD_T);
 	EXT_EVENT_MULTI_CR_ACCESS_RD_T *EventMultiCRAccessRD
 								= (EXT_EVENT_MULTI_CR_ACCESS_RD_T *)(data + 20);
-	MT_RF_REG_PAIR *RegPair = msg->rsp_payload;
+	MT_RF_REG_PAIR *RegPair = (MT_RF_REG_PAIR *)msg->rsp_payload;
 
 	for (Index = 0; Index < Num; Index++)
 	{
@@ -1441,7 +1441,7 @@ static VOID CmdMultipleMacRegAccessReadCb(struct cmd_msg *msg,
 	UINT32 Num = (len - 20) / sizeof(EXT_EVENT_MULTI_CR_ACCESS_RD_T);
 	EXT_EVENT_MULTI_CR_ACCESS_RD_T *EventMultiCRAccessRD
 								= (EXT_EVENT_MULTI_CR_ACCESS_RD_T *)(data + 20);
-	RTMP_REG_PAIR *RegPair = msg->rsp_payload;
+	RTMP_REG_PAIR *RegPair = (RTMP_REG_PAIR *)msg->rsp_payload;
 
 	for (Index = 0; Index < Num; Index++)
 	{
@@ -2015,7 +2015,7 @@ error:
 
 static VOID EventExtNicCapability(struct cmd_msg *msg, char *Data, UINT16 Len)
 {
-	struct _EXT_EVENT_NIC_CAPABILITY_T *ExtEventNicCapability = (struct EXT_EVENT_NIC_CAPABILITY *)Data;
+	struct _EXT_EVENT_NIC_CAPABILITY_T *ExtEventNicCapability = (struct _EXT_EVENT_NIC_CAPABILITY_T *)Data;
 	UINT32 Loop;
 
 	DBGPRINT(RT_DEBUG_OFF, ("The data code of firmware:"));
@@ -2747,7 +2747,7 @@ static VOID EventExtEventHandler(RTMP_ADAPTER *pAd, UINT8 ExtEID, UINT8 *Data, U
 	switch (ExtEID)
 	{
 		case EXT_EVENT_CMD_RESULT:
-			EventExtCmdResult(pAd, Data, Length);			
+			EventExtCmdResult((struct cmd_msg *)pAd, Data, Length);			
 			break;
 		case EXT_EVENT_FW_LOG_2_HOST:
 			ExtEventFwLog2HostHandler(pAd, Data, Length);

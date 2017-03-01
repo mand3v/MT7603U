@@ -1627,10 +1627,10 @@ PRX_CONTEXT RTUSBDequeueRxContext(PRTMP_ADAPTER pAd, DL_LIST *list)
 	Lock = RTUSBGetSpinLock(pAd, list);
 
 	RTMP_SPIN_LOCK_IRQSAVE(Lock, &flags);
-	RxContext = _RTUSBDequeueRxContext(list);
+	RxContext = (PRX_CONTEXT *)_RTUSBDequeueRxContext(list);
 	RTMP_SPIN_UNLOCK_IRQRESTORE(Lock, &flags);
 
-	return RxContext;
+	return *RxContext;
 }
 
 

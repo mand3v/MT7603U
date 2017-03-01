@@ -531,7 +531,7 @@ typedef union _EEPROM_ANTENNA_STRUC {
 /*
   *   EEPROM operation related marcos
   */
-#define RT28xx_EEPROM_READ16(_pAd, _offset, _val)   rt28xx_eeprom_read16(_pAd, _offset, &(_val))
+#define RT28xx_EEPROM_READ16(_pAd, _offset, _val)   rt28xx_eeprom_read16(_pAd, _offset, (USHORT *)&(_val))
 
 #define RT28xx_EEPROM_WRITE16(_pAd, _offset, _val)		\
 	do {\

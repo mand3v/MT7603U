@@ -131,7 +131,7 @@ NTSTATUS mtusb_read_reg(RTMP_ADAPTER *pAd, UINT32 addr, UINT32 *value)
 	UINT32 localVal;
 	UINT32 global_addr = mt_physical_addr_map(addr);
 
-	Status = mtusb_multiread(pAd, global_addr, &localVal, 4);
+	Status = mtusb_multiread(pAd, global_addr, (UCHAR *)&localVal, 4);
 	
 	*value = le2cpu32(localVal);
 	
@@ -147,7 +147,7 @@ NTSTATUS mtusb_write_reg(RTMP_ADAPTER *pAd, UINT32 addr, UINT32 value)
 	NTSTATUS Status;
 	UINT32 global_addr = mt_physical_addr_map(addr);
 
-	Status = mtusb_multiwrite(pAd, global_addr, &value, 4, 4); 
+	Status = mtusb_multiwrite(pAd, global_addr,(IN UCHAR *) &value, 4, 4); 
 
 	return Status;
 }
@@ -183,7 +183,7 @@ NTSTATUS RTUSBWriteMACRegister(
 	IN UINT32 Value,
 	IN BOOLEAN bWriteHigh)
 {
-	mtusb_multiwrite(pAd, Offset, &Value, 4, 4);
+	mtusb_multiwrite(pAd, Offset, (IN UCHAR *)&Value, 4, 4);
 }
 
 

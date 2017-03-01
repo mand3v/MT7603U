@@ -2538,7 +2538,7 @@ UCHAR ra_get_lowest_rate(RTMP_ADAPTER *pAd, MAC_TABLE_ENTRY *pEntry)
 		do {
 			TxRateIndex = NextTxRateIndex;
 			/*  Get pointer to CurrTxRate entry */
-			pNextTxRate = (RTMP_RA_LEGACY_TB *)PTX_RA_GRP_ENTRY(pTable, TxRateIndex);
+			pNextTxRate = (RTMP_RA_GRP_TB *)PTX_RA_GRP_ENTRY(pTable, TxRateIndex);
 			NextTxRateIndex = pNextTxRate->downMcs;
 		} while ( TxRateIndex != NextTxRateIndex );
 	} else {
