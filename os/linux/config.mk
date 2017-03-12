@@ -1941,7 +1941,8 @@ ifeq ($(PLATFORM),PC)
 	export CFLAGS
     else
 	# Linux 2.6
-	EXTRA_CFLAGS := $(WFLAGS) 
+	EXTRA_CFLAGS := $(WFLAGS) -Wno-error=date-time
+ 
     endif
 endif
 
