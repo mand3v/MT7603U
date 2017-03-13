@@ -1,4 +1,4 @@
-How to make?
+## How to make?
 1. If you want to buid the Linux AP code, set the "MODE = AP" in Makefile
    and chose the TARGET to Linux by set "TARGET = LINUX" 
    
@@ -66,3 +66,6 @@ Support:
 	2. add "iwpriv ra0 show driverinfo" to show the driver version
 	3. fix rt_config.h tag of Support station with tab
 	4. merge ATE code request by Gemtek
+
+## Reference 
+https://github.com/kuba-moo/mt7601u

@@ -4,7 +4,7 @@ to improve it.**
 
 ## Build and Install
 ```bash
-sudo make && sudo make install
+make && sudo make install
 ```
 
 Test it:
