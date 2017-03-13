@@ -1,6 +1,6 @@
 # MT7603U driver
-**Warning: there are still many bugs in this project, and welcome to join me wit
-it.**
+**Warning: there are still many bugs in this project, and welcome to join me
+to improve it.**
 
 ## Build and Install
 ```bash
@@ -13,7 +13,7 @@ insmod mt7603u_sta
 depmod
 ```
 
-You may also update the driver:
+You may also want to update existing old driver:
 ```
 rmmod mt7603u*
 insmod mt7603u
