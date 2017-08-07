@@ -142,7 +142,7 @@ THREADX:
 	$(MAKE) -C $(RT28xx_DIR)/os/Threadx -f $(RT28xx_DIR)/os/ThreadX/Makefile
 
 LINUX:
-ifneq (,$(findstring 2.4,$(LINUX_SRC)))
+ifneq (,$(findstring 2.4.,$(LINUX_SRC)))
 
 ifeq ($(OSABL),YES)
 	cp -f os/linux/Makefile.4.util $(RT28xx_DIR)/os/linux/Makefile
@@ -232,7 +232,7 @@ endif
 
 uninstall:
 ifeq ($(TARGET), LINUX)
-ifneq (,$(findstring 2.4,$(LINUX_SRC)))
+ifneq (,$(findstring 2.4.,$(LINUX_SRC)))
 	$(MAKE) -C $(RT28xx_DIR)/os/linux -f Makefile.4 uninstall
 else
 	$(MAKE) -C $(RT28xx_DIR)/os/linux -f Makefile.6 uninstall
@@ -241,7 +241,7 @@ endif
 
 install:
 ifeq ($(TARGET), LINUX)
-ifneq (,$(findstring 2.4,$(LINUX_SRC)))
+ifneq (,$(findstring 2.4.,$(LINUX_SRC)))
 	$(MAKE) -C $(RT28xx_DIR)/os/linux -f Makefile.4 install
 else
 	$(MAKE) -C $(RT28xx_DIR)/os/linux -f Makefile.6 install
@@ -249,7 +249,7 @@ endif
 endif
 
 libwapi:
-ifneq (,$(findstring 2.4,$(LINUX_SRC)))
+ifneq (,$(findstring 2.4.,$(LINUX_SRC)))
 	cp -f os/linux/Makefile.libwapi.4 $(RT28xx_DIR)/os/linux/Makefile
 	$(MAKE) -C $(RT28xx_DIR)/os/linux/
 else
@@ -259,7 +259,7 @@ endif
 
 osutil:
 ifeq ($(OSABL),YES)
-ifneq (,$(findstring 2.4,$(LINUX_SRC)))
+ifneq (,$(findstring 2.4.,$(LINUX_SRC)))
 	cp -f os/linux/Makefile.4.util $(RT28xx_DIR)/os/linux/Makefile
 	$(MAKE) -C $(RT28xx_DIR)/os/linux/
 else
@@ -270,7 +270,7 @@ endif
 
 osnet:
 ifeq ($(OSABL),YES)
-ifneq (,$(findstring 2.4,$(LINUX_SRC)))
+ifneq (,$(findstring 2.4.,$(LINUX_SRC)))
 	cp -f os/linux/Makefile.4.netif $(RT28xx_DIR)/os/linux/Makefile
 	$(MAKE) -C $(RT28xx_DIR)/os/linux/
 else
@@ -280,7 +280,7 @@ endif
 endif
 
 osdrv:
-ifneq (,$(findstring 2.4,$(LINUX_SRC)))
+ifneq (,$(findstring 2.4.,$(LINUX_SRC)))
 	cp -f os/linux/Makefile.4 $(RT28xx_DIR)/os/linux/Makefile
 	$(MAKE) -C $(RT28xx_DIR)/os/linux/
 else
